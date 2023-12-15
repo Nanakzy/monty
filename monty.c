@@ -1,5 +1,6 @@
 #include "monty.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * main - Entry point for the Monty interpreter.
@@ -13,6 +14,7 @@ int main(int argc, char *argv[])
 	unsigned int line_number = 0;
 	char *line = NULL;
 	size_t len = 0;
+	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -30,6 +32,7 @@ int main(int argc, char *argv[])
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
+		parse_instruction(line, &stack, line_number);
 	}
 
 	free(line);
