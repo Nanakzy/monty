@@ -10,13 +10,13 @@
  */
 void parse_instruction(char *line, stack_t **stack, unsigned int line_number)
 {
-	char *token = strtok(line, " \n\t");
+	char *token = strtok(line, " \n\t$");
 
 	if (token)
 	{
 		if (strcmp(token, "push") == 0)
 		{
-			token = strtok(NULL, " \n\t");
+			token = strtok(NULL, " \n\t$");
 			if (token)
 			{
 				int value = atoi(token);
@@ -32,6 +32,15 @@ void parse_instruction(char *line, stack_t **stack, unsigned int line_number)
 		else if (strcmp(token, "pall") == 0)
 		{
 			pall(stack, line_number);
+		}
+		else if (strcmp(token, "pop") == 0)
+		{
+			pop(stack, line_number);
+		}
+		else
+		{
+			fprintf(stderr, "%s:%u: invalid opcode\n", __FILE__, line_number);
+			exit(1);
 		}
 	}
 }
