@@ -37,6 +37,10 @@ void parse_instruction(char *line, stack_t **stack, unsigned int line_number)
 		{
 			pop(stack, line_number);
 		}
+		else if (strcmp(token, "pint") == 0)
+		{
+			pint(stack, line_number);
+		}
 		else
 		{
 			fprintf(stderr, "%s:%u: invalid opcode\n", __FILE__, line_number);
