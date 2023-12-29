@@ -44,5 +44,6 @@ void pall(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void parse_instruction(char *line, stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
+void initStack(Stack *stack);
 
 #endif /* MONTY_H */
