@@ -8,13 +8,20 @@
  */
 int main(int argc, char *argv[])
 {
+	FILE *file;
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t read;
+	unsigned int line_number = 0;
+	stack_t *stack;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: %s file\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 
-	FILE *file = fopen(argv[1], "r");
+	file = fopen(argv[1], "r");
 
 	if (!file)
 	{
@@ -22,22 +29,15 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
-	unsigned int line_number = 0;
-	Stack stack;
-
 	initStack(&stack);
 
 	while ((read = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
 
-		if (read > 1)
+		if (read > 0 && line[read - 1] == '\n')
 		{
-			if (line[read - 1] == '\n')
-				line[read - 1] = '\0';
+			line[read - 1] = '\0';
 
 			parse_instruction(line, &stack, line_number);
 		}

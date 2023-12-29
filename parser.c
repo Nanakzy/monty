@@ -10,7 +10,7 @@
  */
 void parse_instruction(char *line, stack_t **stack, unsigned int line_number)
 {
-	char *token = strtok(line, " \n\t$");
+	char *token = strtok(line, " \n\t");
 
 	if (token)
 	{
